@@ -7,6 +7,10 @@ class ProcessingPipeline {
         this.options = options
     }
 
+    static boolean optionsInvalid(def options) {
+        options?.arguments()?.size() < 2
+    }
+
     void executePipeline() {
 
     }
