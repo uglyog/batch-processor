@@ -17,4 +17,5 @@ so execute
 
 ```
 $ ./build/install/batchprocessor/bin/batchprocessor <arguments>
+Batch Processor Version 0.0.1
 ```
