@@ -16,6 +16,9 @@ The application bundle has a start script in `./build/install/batchprocessor/bin
 so execute
 
 ```
-$ ./build/install/batchprocessor/bin/batchprocessor <arguments>
+$ ./build/install/batchprocessor/bin/batchprocessor
 Batch Processor Version 0.0.1
+
+usage: batchprocessor [options] inputfile targetdirectory
+ -help   print this message
 ```
