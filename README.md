@@ -7,7 +7,7 @@ Simple batch file processor written in Groovy
 $ ./gradle check install
 ```
 
-This will run all the tests and build a application bundle.
+This will run all the tests and build an application bundle.
 
 ## To execute the batch process
 
