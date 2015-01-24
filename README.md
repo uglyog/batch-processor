@@ -22,3 +22,8 @@ Batch Processor Version 0.0.1
 usage: batchprocessor [options] inputfile targetdirectory
  -help   print this message
 ```
+
+## NOTE on Java versions
+
+Java 1.7 and Java 1.8 less than 1.8.31 have a defect which causes groovy to fail with a verification error.
+Java 1.8.0.31+ fixes this issue.

@@ -4,6 +4,7 @@ import com.github.uglyog.batchprocessor.commands.Command
 import org.junit.Before
 import org.junit.Test
 
+import static org.mockito.Matchers.anyMap
 import static org.mockito.Mockito.mock
 import static org.mockito.Mockito.spy
 import static org.mockito.Mockito.verify
@@ -47,11 +48,11 @@ class ProcessingPipelineTest {
         pipeline.pipeline = [command1, command2]
 
         def secondArgs = 'pass this to second command'
-        when(command1.execute(args)).thenReturn(secondArgs)
+        when(command1.execute(anyMap())).thenReturn(secondArgs)
 
         pipeline.executePipeline()
 
-        verify(command1).execute(args)
+        verify(command1).execute(anyMap())
         verify(command2).execute(secondArgs)
     }
 

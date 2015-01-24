@@ -3,6 +3,7 @@ package com.github.uglyog.batchprocessor
 import com.github.uglyog.batchprocessor.commands.Command
 import com.github.uglyog.batchprocessor.commands.ValidateInputFile
 import com.github.uglyog.batchprocessor.commands.ValidateTargetDirectory
+import org.apache.commons.lang3.time.StopWatch
 import org.fusesource.jansi.Ansi
 import org.fusesource.jansi.AnsiConsole
 
@@ -28,7 +29,11 @@ class ProcessingPipeline {
                 .reset())
         }
 
+        StopWatch sw = new StopWatch()
+        sw.start()
         executeEach()
+        sw.stop()
+        AnsiConsole.out().println(Ansi.ansi().a("Total processing time: $sw"))
     }
 
     private void setupPipeline() {
@@ -40,7 +45,7 @@ class ProcessingPipeline {
     }
 
     private void executeEach() {
-        def pipelineResult = options.arguments()
+        def pipelineResult = [args: options.arguments(), options: options]
         pipeline.each { Command command ->
             pipelineResult = command.execute(pipelineResult)
         }
