@@ -13,11 +13,11 @@ class GenerateOutputFiles implements Command {
             AnsiConsole.out().println(Ansi.ansi().a('    --> Generating ').bold()
                 .a(filename).boldOff())
             def outputFile  = new File(context.targetDirectory, filename)
-            template = template.replaceAll('\\{\\{ TITLE GOES HERE \\}\\}', data.title)
+            def fileContents = template.replaceAll('\\{\\{ TITLE GOES HERE \\}\\}', data.title)
                 .replaceAll('\\{\\{ NAVIGATION GOES HERE \\}\\}', data.navigation)
                 .replaceAll('\\{\\{ THUMBNAIL IMAGES GO HERE \\}\\}', data.thumbnails)
 
-            outputFile.write(template)
+            outputFile.write(fileContents)
         }
 
         return context

@@ -1,5 +1,6 @@
 package com.github.uglyog.batchprocessor.commands
 
+import com.google.common.net.UrlEscapers
 import groovy.xml.MarkupBuilder
 
 class GenerateIndex implements Command {
@@ -27,6 +28,12 @@ class GenerateIndex implements Command {
     }
 
     def generateNavigation(def context) {
-        ''
+        def writer = new StringWriter()
+        def html = new MarkupBuilder(new PrintWriter(writer))
+        def escaper = UrlEscapers.urlFragmentEscaper()
+        context.files.makes.each { file ->
+            html.a(href: escaper.escape(file), file.replaceAll('\\.html', ''))
+        }
+        writer.toString()
     }
 }

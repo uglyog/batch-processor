@@ -12,7 +12,7 @@ class ParseWorksFile implements Command {
         pipelineContext.data.makes = pipelineContext.data.original.children().groupBy { work ->
             def make = work.exif.make.toString()
             if (StringUtils.isBlank(make)) {
-                'Unknown'
+                'Unknown Make'
             } else {
                 make
             }
@@ -21,7 +21,7 @@ class ParseWorksFile implements Command {
             pipelineContext.data.makes[make] = worksForThatMake.groupBy { work ->
                 def model = work.exif.model.toString()
                 if (StringUtils.isBlank(model)) {
-                    'Unknown'
+                    'Unknown Model'
                 } else {
                     model
                 }

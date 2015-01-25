@@ -43,14 +43,14 @@ public class ParseWorksFileTest {
 
         command.execute(context)
 
-        assert context.data.makes.keySet() == ['MAKE1', 'MAKE2', 'Unknown'] as Set
+        assert context.data.makes.keySet() == ['MAKE1', 'MAKE2', 'Unknown Make'] as Set
         assert context.data.makes.MAKE1.keySet() == ['MODEL1'] as Set
         assert context.data.makes.MAKE1.MODEL1.collect{it.id} == ['001']
-        assert context.data.makes.MAKE2.keySet() == ['Unknown'] as Set
-        assert context.data.makes.MAKE2.Unknown.collect{it.id} == ['002']
-        assert context.data.makes.Unknown.keySet() == ['MODEL2', 'Unknown'] as Set
-        assert context.data.makes.Unknown.MODEL2.collect{it.id} == ['003']
-        assert context.data.makes.Unknown.Unknown.collect{it.id} == ['004', '005']
+        assert context.data.makes.MAKE2.keySet() == ['Unknown Model'] as Set
+        assert context.data.makes.MAKE2.'Unknown Model'.collect{it.id} == ['002']
+        assert context.data.makes.'Unknown Make'.keySet() == ['MODEL2', 'Unknown Model'] as Set
+        assert context.data.makes.'Unknown Make'.MODEL2.collect{it.id} == ['003']
+        assert context.data.makes.'Unknown Make'.'Unknown Model'.collect{it.id} == ['004', '005']
     }
 
 

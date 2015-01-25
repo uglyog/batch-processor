@@ -15,12 +15,18 @@ public class GenerateIndexTest {
             <url type="small">small.jpg</url>
             <url type="large">large.jpg</url>
         </urls>
+        <exif>
+            <make>MAKE1</make>
+        </exif>
     </work>
     <work>
         <id>002</id>
         <urls>
             <url type="small">small2.jpg</url>
         </urls>
+        <exif>
+            <make>MAKE1</make>
+        </exif>
     </work>
     <work>
         <id>003</id>
@@ -28,6 +34,9 @@ public class GenerateIndexTest {
             <url type="large">large3.jpg</url>
             <url type="small">small3.jpg</url>
         </urls>
+        <exif>
+            <make>MAKE2</make>
+        </exif>
     </work>
 </works>
     '''
@@ -39,7 +48,10 @@ public class GenerateIndexTest {
             data: [
                 original:  new XmlSlurper().parseText(worksXml)
             ],
-            results: [:]
+            results: [:],
+            files: [
+                makes: ['MAKE1.html', 'MAKE2.html']
+            ]
         ]
     }
 
@@ -57,7 +69,9 @@ public class GenerateIndexTest {
     @Test
     void 'generates a navigation that allows the user to browse to all camera makes'() {
         def result = command.execute(context)
-        assert result.results['index.html'].navigation == ''
+        assert result.results['index.html'].navigation ==
+'''<a href='MAKE1.html'>MAKE1</a>
+<a href='MAKE2.html'>MAKE2</a>'''
     }
 
 }

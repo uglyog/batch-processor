@@ -2,6 +2,7 @@ package com.github.uglyog.batchprocessor
 
 import com.github.uglyog.batchprocessor.commands.Command
 import com.github.uglyog.batchprocessor.commands.GenerateIndex
+import com.github.uglyog.batchprocessor.commands.GenerateMakes
 import com.github.uglyog.batchprocessor.commands.GenerateOutputFiles
 import com.github.uglyog.batchprocessor.commands.ParseWorksFile
 import com.github.uglyog.batchprocessor.commands.ValidateInputFile
@@ -45,6 +46,7 @@ class ProcessingPipeline {
             new ValidateInputFile(),
             new ValidateTargetDirectory(),
             new ParseWorksFile(),
+            new GenerateMakes(),
             new GenerateIndex(),
             new GenerateOutputFiles()
         ]
@@ -55,7 +57,8 @@ class ProcessingPipeline {
             args: options.arguments(),
             options: options,
             results: [:],
-            data: [:]
+            data: [:],
+            files: [:]
         ]
         pipeline.each { Command command ->
             pipelineContext = command.execute(pipelineContext)
