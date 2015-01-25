@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<works>
+    <work>
+        <id>001</id>
+        <exif>
+            <make>MAKE1</make>
+            <model>MODEL1</model>
+        </exif>
+    </work>
+    <work>
+        <id>003</id>
+        <exif>
+            <make>MAKE1</make>
+            <model>MODEL2</model>
+        </exif>
+    </work>
+    <work>
+        <id>002</id>
+        <exif>
+            <make>MAKE2</make>
+            <model>MODEL1</model>
+        </exif>
+    </work>
+    <work>
+        <id>004</id>
+        <exif>
+            <make>MAKE1</make>
+            <model>MODEL1</model>
+        </exif>
+    </work>
+</works>

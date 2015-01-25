@@ -2,6 +2,7 @@ package com.github.uglyog.batchprocessor
 
 import com.github.uglyog.batchprocessor.commands.Command
 import com.github.uglyog.batchprocessor.commands.GenerateOutputFile
+import com.github.uglyog.batchprocessor.commands.ParseWorksFile
 import com.github.uglyog.batchprocessor.commands.ValidateInputFile
 import com.github.uglyog.batchprocessor.commands.ValidateTargetDirectory
 import org.apache.commons.lang3.time.StopWatch
@@ -42,6 +43,7 @@ class ProcessingPipeline {
         pipeline = [
             new ValidateInputFile(),
             new ValidateTargetDirectory(),
+            new ParseWorksFile(),
             new GenerateOutputFile()
         ]
     }
@@ -50,7 +52,8 @@ class ProcessingPipeline {
         def pipelineContext = [
             args: options.arguments(),
             options: options,
-            results: [:]
+            results: [:],
+            data: [:]
         ]
         pipeline.each { Command command ->
             pipelineContext = command.execute(pipelineContext)
