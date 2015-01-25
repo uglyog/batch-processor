@@ -13,7 +13,7 @@ public class ParseWorksFileTest {
     void setup() {
         command = new ParseWorksFile()
         context = [
-            inputFile: File.createTempFile(GenerateOutputFileTest.getSimpleName(), '.xml'),
+            inputFile: File.createTempFile(ParseWorksFileTest.getSimpleName(), '.xml'),
             data: [:]
         ]
     }

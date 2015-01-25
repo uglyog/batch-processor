@@ -1,7 +1,8 @@
 package com.github.uglyog.batchprocessor
 
 import com.github.uglyog.batchprocessor.commands.Command
-import com.github.uglyog.batchprocessor.commands.GenerateOutputFile
+import com.github.uglyog.batchprocessor.commands.GenerateIndex
+import com.github.uglyog.batchprocessor.commands.GenerateOutputFiles
 import com.github.uglyog.batchprocessor.commands.ParseWorksFile
 import com.github.uglyog.batchprocessor.commands.ValidateInputFile
 import com.github.uglyog.batchprocessor.commands.ValidateTargetDirectory
@@ -24,7 +25,7 @@ class ProcessingPipeline {
 
     void executePipeline() {
         AnsiConsole.out().println(Ansi.ansi().a('Processing input file ').bold()
-            .a(options.arguments()[0]).boldOff().a(' to output folder ').a(options.arguments()[1]).boldOff())
+            .a(options.arguments()[0]).boldOff().a(' to output folder ').bold().a(options.arguments()[1]).boldOff())
         if (options.arguments().size() > 2) {
             AnsiConsole.out().println(Ansi.ansi().fg(Ansi.Color.YELLOW).a(
                 'Warning: Ignoring additional parameters after the first two.')
@@ -44,7 +45,8 @@ class ProcessingPipeline {
             new ValidateInputFile(),
             new ValidateTargetDirectory(),
             new ParseWorksFile(),
-            new GenerateOutputFile()
+            new GenerateIndex(),
+            new GenerateOutputFiles()
         ]
     }
 
