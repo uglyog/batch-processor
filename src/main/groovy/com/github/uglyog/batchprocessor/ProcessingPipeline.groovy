@@ -1,6 +1,7 @@
 package com.github.uglyog.batchprocessor
 
 import com.github.uglyog.batchprocessor.commands.Command
+import com.github.uglyog.batchprocessor.commands.GenerateOutputFile
 import com.github.uglyog.batchprocessor.commands.ValidateInputFile
 import com.github.uglyog.batchprocessor.commands.ValidateTargetDirectory
 import org.apache.commons.lang3.time.StopWatch
@@ -40,14 +41,19 @@ class ProcessingPipeline {
         // would probably load this from some configuration file
         pipeline = [
             new ValidateInputFile(),
-            new ValidateTargetDirectory()
+            new ValidateTargetDirectory(),
+            new GenerateOutputFile()
         ]
     }
 
     private void executeEach() {
-        def pipelineResult = [args: options.arguments(), options: options]
+        def pipelineContext = [
+            args: options.arguments(),
+            options: options,
+            results: [:]
+        ]
         pipeline.each { Command command ->
-            pipelineResult = command.execute(pipelineResult)
+            pipelineContext = command.execute(pipelineContext)
         }
     }
 }
