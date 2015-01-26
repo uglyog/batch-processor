@@ -52,10 +52,10 @@ public class GenerateMakesTest {
         context = [
             data: [
                 makes: [
-                    'make1': [
+                    make1: [
                         model1: slurper.parseText(model1Xml)
                     ],
-                    'make2': [
+                    make2: [
                         model2: slurper.parseText(model2Xml),
                         model3: slurper.parseText(model3Xml)
                     ]
