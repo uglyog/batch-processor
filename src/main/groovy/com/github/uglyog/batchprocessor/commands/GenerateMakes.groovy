@@ -1,5 +1,8 @@
 package com.github.uglyog.batchprocessor.commands
 
+import com.google.common.net.UrlEscapers
+import groovy.xml.MarkupBuilder
+
 class GenerateMakes implements Command {
     @Override
     def execute(def pipelineContext) {
@@ -8,8 +11,8 @@ class GenerateMakes implements Command {
             def filename = make + '.html'
             pipelineContext.results[filename] = [
                 title: make,
-                navigation: generateNavigation(pipelineContext, make, works),
-                thumbnails: generateThumbnails(pipelineContext, make, works)
+                navigation: generateNavigation(pipelineContext, make),
+                thumbnails: generateThumbnails(works)
             ]
             pipelineContext.files.makes << filename
         }
@@ -17,11 +20,25 @@ class GenerateMakes implements Command {
         return pipelineContext
     }
 
-    def generateNavigation(Object context, Object make, Object works) {
-        ''
+    def generateNavigation(context, make) {
+        def writer = new StringWriter()
+        def html = new MarkupBuilder(new PrintWriter(writer))
+        def escaper = UrlEscapers.urlFragmentEscaper()
+        html.a(href: escaper.escape('index.html'), 'index')
+        context.files.models[make].each { file ->
+            html.a(href: escaper.escape(file), file.replaceAll('\\.html', ''))
+        }
+        writer.toString()
     }
 
-    def generateThumbnails(Object context, Object make, Object works) {
-        ''
+    def generateThumbnails(works) {
+        def writer = new StringWriter()
+        def html = new MarkupBuilder(new PrintWriter(writer))
+        html.div('class': 'thumbnails') {
+            works.collect{ it.value }.flatten().take(10).each { work ->
+                img(src: work.urls.url.find{ it.@type == 'small' })
+            }
+        }
+        writer.toString()
     }
 }
